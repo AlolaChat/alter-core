@@ -3,12 +3,22 @@
   "globalDependencies": ["**/.env.*local"],
   "pipeline": {
     "build": {
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": ["dist/**"],
+      "dependsOn": ["^build"]
+    },
+    "build:fast": {
+      "outputs": ["dist/**"],
+      "dependsOn": ["^build:fast"]
     },
     "lint": {},
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "typecheck": {
+      "cache": false,
+      "dependsOn": ["^typecheck"]
     }
-  }
+  },
+  "globalDependencies": ["tsconfig.json"]
 }
